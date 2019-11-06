@@ -1,0 +1,23 @@
+本文配套用于慕课网悟空老师的《Java并发核心知识精讲》课，本文所涵盖的知识导图的内容，在课程中有详细讲解。
+课程地址：https://coding.imooc.com/class/362.html
+
+以下思维导图会持续更新，所以请访问线上版本：
+
+线程8大核心基础：
+http://naotu.baidu.com/file/07f437ff6bc3fa7939e171b00f133e17?token=6744a1c6ca6860a0
+
+Java内存模型——底层原理：
+http://naotu.baidu.com/file/60a0bdcaca7c6b92fcc5f796fe6f6bc9?token=bcdbae34bb3b0533
+
+死锁——从产生到消除：
+http://naotu.baidu.com/file/ec7748c253f4fc9d88ac1cc1e47814f3?token=bb71b5895a747d67
+
+二级大纲（复习用） 成体系的Java并发多线程核心+内存模型+死锁——从用法到原理，面试必考：
+http://naotu.baidu.com/file/29942292cd032adfae23c09783676004?token=130df3d389cab703
+
+
+
+并发工具类分类：
+http://naotu.baidu.com/file/3902a010470d7c1cf76fe719be124797?token=bec25304cc071bf1
+
+
