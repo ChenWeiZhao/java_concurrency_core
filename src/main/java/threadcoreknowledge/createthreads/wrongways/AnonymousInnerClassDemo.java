@@ -14,6 +14,7 @@ public class AnonymousInnerClassDemo {
                 System.out.println(Thread.currentThread().getName());
             }
         }.start();
+
         new Thread(new Runnable() {
             @Override
             public void run() {

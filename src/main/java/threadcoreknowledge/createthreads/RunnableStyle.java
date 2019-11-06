@@ -10,6 +10,9 @@ public class RunnableStyle implements Runnable {
         thread.start();
     }
 
+    /**
+     * 最终调用target.run()；
+     */
     @Override
     public void run() {
         System.out.println("用Runnable方法实现线程");
