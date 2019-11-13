@@ -1,10 +1,12 @@
 package threadcoreknowledge.stopthreads;
 
 /**
- * 描述：最佳实践2：在catch子语句中调用Thread.currentThread().interrupt()来恢复设置中断状态，以便于在后续的执行中，依然能够检查到刚才发生了中断
- * 回到刚才RightWayStopThreadInProd补上中断，让它跳出
+ * 描述：最佳实践2：
+ * 在catch子语句中调用Thread.currentThread().interrupt()来恢复设置中断状态，
+ * 以便于在后续的执行中，依然能够检查到刚才发生了中断
+ * 回到刚才{@link StopThreadInProd}补上中断，让它跳出
  */
-public class RightWayStopThreadInProd2 implements Runnable {
+public class StopThreadInProd2 implements Runnable {
 
     @Override
     public void run() {
@@ -21,13 +23,14 @@ public class RightWayStopThreadInProd2 implements Runnable {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
+            //重新设置中断，外层的isInterrupted可获取到
             Thread.currentThread().interrupt();
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Thread thread = new Thread(new RightWayStopThreadInProd2());
+        Thread thread = new Thread(new StopThreadInProd2());
         thread.start();
         Thread.sleep(1000);
         thread.interrupt();

@@ -1,10 +1,14 @@
-package threadcoreknowledge.stopthreads.volatiledemo;
+package threadcoreknowledge.stopthreads.wrongways.volatiledemo;
 
 /**
- * 描述：     演示用volatile的局限：part1 看似可行
+ * 描述：     演示用volatile的局限
+ * part1 看似可行，但有局限性
  */
-public class WrongWayVolatile implements Runnable {
+public class WrongVolatile implements Runnable {
 
+    /**
+     * volatile让变量具有可见性，让多个线程都可以看到他真实的值
+     */
     private volatile boolean canceled = false;
 
     @Override
@@ -24,7 +28,7 @@ public class WrongWayVolatile implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        WrongWayVolatile r = new WrongWayVolatile();
+        WrongVolatile r = new WrongVolatile();
         Thread thread = new Thread(r);
         thread.start();
         Thread.sleep(5000);

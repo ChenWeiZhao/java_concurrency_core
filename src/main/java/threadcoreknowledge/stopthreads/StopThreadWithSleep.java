@@ -3,7 +3,7 @@ package threadcoreknowledge.stopthreads;
 /**
  * 描述：     带有sleep的中断线程的写法
  */
-public class RightWayStopThreadWithSleep {
+public class StopThreadWithSleep {
 
     public static void main(String[] args) throws InterruptedException {
         Runnable runnable = () -> {
@@ -15,6 +15,7 @@ public class RightWayStopThreadWithSleep {
                     }
                     num++;
                 }
+                //1秒钟的睡眠，线程在睡眠时被中断，在阻塞时，会抛出异常
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -1,4 +1,4 @@
-package threadcoreknowledge.stopthreads.volatiledemo;
+package threadcoreknowledge.stopthreads.wrongways.volatiledemo;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -6,10 +6,11 @@ import java.util.concurrent.BlockingQueue;
 /**
  * 描述：     用中断来修复刚才的无尽等待问题
  */
-public class WrongWayVolatileFixed {
+public class FixedWrongVolatile {
 
     public static void main(String[] args) throws InterruptedException {
-        WrongWayVolatileFixed body = new WrongWayVolatileFixed();
+        //要先实例化外部类，才能实例化内部类
+        FixedWrongVolatile body = new FixedWrongVolatile();
         ArrayBlockingQueue storage = new ArrayBlockingQueue(10);
 
         Producer producer = body.new Producer(storage);
@@ -42,6 +43,7 @@ public class WrongWayVolatileFixed {
         public void run() {
             int num = 0;
             try {
+                //判断条件中加入响应中断
                 while (num <= 100000 && !Thread.currentThread().isInterrupted()) {
                     if (num % 100 == 0) {
                         storage.put(num);
