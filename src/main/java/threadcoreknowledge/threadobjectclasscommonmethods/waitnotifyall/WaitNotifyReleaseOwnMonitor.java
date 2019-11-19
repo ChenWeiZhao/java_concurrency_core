@@ -1,7 +1,8 @@
-package threadcoreknowledge.threadobjectclasscommonmethods;
+package threadcoreknowledge.threadobjectclasscommonmethods.waitnotifyall;
 
 /**
  * 描述：     证明wait只释放当前的那把锁
+ *
  */
 public class WaitNotifyReleaseOwnMonitor {
 
@@ -18,6 +19,7 @@ public class WaitNotifyReleaseOwnMonitor {
                         System.out.println("ThreadA got resourceB lock.");
                         try {
                             System.out.println("ThreadA releases resourceA lock.");
+                            //进入等待集，释放锁
                             resourceA.wait();
 
                         } catch (InterruptedException e) {

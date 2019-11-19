@@ -1,8 +1,9 @@
-package threadcoreknowledge.threadobjectclasscommonmethods;
+package threadcoreknowledge.threadobjectclasscommonmethods.waitnotifyall;
 
 
 /**
  * 描述：     两个线程交替打印0~100的奇偶数，用wait和notify
+ * 不会存在拿到锁浪费的情况
  */
 public class WaitNotifyPrintOddEveWait {
 
@@ -15,8 +16,10 @@ public class WaitNotifyPrintOddEveWait {
         new Thread(new TurningRunner(), "奇数").start();
     }
 
-    //1. 拿到锁，我们就打印
-    //2. 打印完，唤醒其他线程，自己就休眠
+    /**
+     * 1. 一旦拿到锁，我们就打印
+     * 2. 打印完，唤醒其他线程，自己就休眠
+     */
     static class TurningRunner implements Runnable {
 
         @Override

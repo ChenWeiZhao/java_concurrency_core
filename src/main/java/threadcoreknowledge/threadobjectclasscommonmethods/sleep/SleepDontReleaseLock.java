@@ -1,4 +1,4 @@
-package threadcoreknowledge.threadobjectclasscommonmethods;
+package threadcoreknowledge.threadobjectclasscommonmethods.sleep;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -15,6 +15,7 @@ public class SleepDontReleaseLock implements Runnable {
         lock.lock();
         System.out.println("线程" + Thread.currentThread().getName() + "获取到了锁");
         try {
+            //sleep并不释放自己持有的锁
             Thread.sleep(5000);
             System.out.println("线程" + Thread.currentThread().getName() + "已经苏醒");
         } catch (InterruptedException e) {
