@@ -1,7 +1,9 @@
-package threadcoreknowledge.uncaughtexception;
+package threadcoreknowledge.uncaughtexception.reason;
 
 /**
- * 描述：     单线程，抛出，处理，有异常堆栈 多线程，子线程发生异常，会有什么不同？
+ * 描述：     原因一
+ * 单线程，抛出，处理，有异常堆栈
+ * 多线程时，子线程发生异常，主线程不受影响
  */
 public class ExceptionInChildThread implements Runnable {
 
