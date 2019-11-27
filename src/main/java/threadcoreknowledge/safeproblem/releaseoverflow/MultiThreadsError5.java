@@ -1,32 +1,29 @@
-package background;
-
+package threadcoreknowledge.safeproblem.releaseoverflow;
 
 /**
- * 描述：     用工厂模式修复刚才的初始化问题
+ * 描述：     观察者模式
+ * 隐式逸出——注册监听事件
  */
-public class MultiThreadsError7 {
+public class MultiThreadsError5 {
 
     int count;
-    private EventListener listener;
 
-    private MultiThreadsError7(MySource source) {
-        listener = new EventListener() {
+    public MultiThreadsError5(MySource source) {
+        source.registerListener(new EventListener() {
+            /**
+             * 注册监听器，拿到了count
+             * 相当于提前赋值
+             */
             @Override
-            public void onEvent(MultiThreadsError5.Event e) {
+            public void onEvent(Event e) {
                 System.out.println("\n我得到的数字是" + count);
             }
 
-        };
+        });
         for (int i = 0; i < 10000; i++) {
             System.out.print(i);
         }
         count = 100;
-    }
-
-    public static MultiThreadsError7 getInstance(MySource source) {
-        MultiThreadsError7 safeListener = new MultiThreadsError7(source);
-        source.registerListener(safeListener.listener);
-        return safeListener;
     }
 
     public static void main(String[] args) {
@@ -39,11 +36,11 @@ public class MultiThreadsError7 {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                mySource.eventCome(new MultiThreadsError5.Event() {
+                mySource.eventCome(new Event() {
                 });
             }
         }).start();
-        MultiThreadsError7 multiThreadsError7 = new MultiThreadsError7(mySource);
+        MultiThreadsError5 multiThreadsError5 = new MultiThreadsError5(mySource);
     }
 
     static class MySource {
@@ -54,7 +51,7 @@ public class MultiThreadsError7 {
             this.listener = eventListener;
         }
 
-        void eventCome(MultiThreadsError5.Event e) {
+        void eventCome(Event e) {
             if (listener != null) {
                 listener.onEvent(e);
             } else {
@@ -66,7 +63,7 @@ public class MultiThreadsError7 {
 
     interface EventListener {
 
-        void onEvent(MultiThreadsError5.Event e);
+        void onEvent(Event e);
     }
 
     interface Event {

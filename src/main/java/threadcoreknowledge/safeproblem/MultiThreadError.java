@@ -1,7 +1,7 @@
-package background;
+package threadcoreknowledge.safeproblem;
 
 /**
- * 描述：     第二章线程安全问题，演示死锁。
+ * 描述：     第二章线程安全问题，演示死锁。必定发生死锁。
  */
 public class MultiThreadError implements Runnable {
 

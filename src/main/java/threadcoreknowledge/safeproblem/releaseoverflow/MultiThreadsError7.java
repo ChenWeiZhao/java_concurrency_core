@@ -1,24 +1,35 @@
-package background;
+package threadcoreknowledge.safeproblem.releaseoverflow;
+
 
 /**
- * 描述：     观察者模式
+ * 描述：     用工厂模式修复6的初始化问题
  */
-public class MultiThreadsError5 {
+public class MultiThreadsError7 {
 
     int count;
+    private EventListener listener;
 
-    public MultiThreadsError5(MySource source) {
-        source.registerListener(new EventListener() {
+    private MultiThreadsError7(MySource source) {
+        listener = new EventListener() {
             @Override
-            public void onEvent(Event e) {
+            public void onEvent(MultiThreadsError5.Event e) {
                 System.out.println("\n我得到的数字是" + count);
             }
 
-        });
+        };
         for (int i = 0; i < 10000; i++) {
             System.out.print(i);
         }
         count = 100;
+    }
+
+    /**
+     * 工厂方法
+     */
+    public static MultiThreadsError7 getInstance(MySource source) {
+        MultiThreadsError7 safeListener = new MultiThreadsError7(source);
+        source.registerListener(safeListener.listener);
+        return safeListener;
     }
 
     public static void main(String[] args) {
@@ -31,11 +42,11 @@ public class MultiThreadsError5 {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                mySource.eventCome(new Event() {
+                mySource.eventCome(new MultiThreadsError5.Event() {
                 });
             }
         }).start();
-        MultiThreadsError5 multiThreadsError5 = new MultiThreadsError5(mySource);
+        MultiThreadsError7 multiThreadsError7 = new MultiThreadsError7(mySource);
     }
 
     static class MySource {
@@ -46,7 +57,7 @@ public class MultiThreadsError5 {
             this.listener = eventListener;
         }
 
-        void eventCome(Event e) {
+        void eventCome(MultiThreadsError5.Event e) {
             if (listener != null) {
                 listener.onEvent(e);
             } else {
@@ -58,7 +69,7 @@ public class MultiThreadsError5 {
 
     interface EventListener {
 
-        void onEvent(Event e);
+        void onEvent(MultiThreadsError5.Event e);
     }
 
     interface Event {
