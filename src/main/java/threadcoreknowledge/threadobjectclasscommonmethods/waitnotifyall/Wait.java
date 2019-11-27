@@ -15,7 +15,7 @@ public class Wait {
                 //进入synchronized代码块中说明已经得到锁
                 System.out.println(Thread.currentThread().getName() + "开始执行了");
                 try {
-                    //调用wait()线程1会释放锁object，线程1会陷入阻塞，即wait状态
+                    //调用wait()的线程1会释放锁object，线程1会陷入阻塞，即wait状态
                     object.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

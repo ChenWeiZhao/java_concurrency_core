@@ -2,9 +2,10 @@ package threadcoreknowledge.threadobjectclasscommonmethods.join;
 
 /**
  * 描述：     演示join期间被中断的效果
- * 1、主线程的引用去中断主线程
- * 2、而主线程开始等待子线程了，遇到中断就会抛出异常，并把中断传递给子线程
- * 3、子线程中断
+ * 1、子线程加入主线程
+ * 2、主线程的引用去中断主线程
+ * 3、而主线程开始等待子线程了，遇到中断就会抛出异常，并把中断传递给子线程
+ * 4、子线程中断
  */
 public class JoinInterrupt {
     public static void main(String[] args) {
