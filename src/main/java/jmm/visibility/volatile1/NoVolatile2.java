@@ -1,32 +1,36 @@
-package jmm;
-
+package jmm.visibility.volatile1;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 描述：     不适用于volatile的场景
+ * 描述：     volatile不适用的情况2
  */
-public class NoVolatile implements Runnable {
+public class NoVolatile2 implements Runnable {
 
-    volatile int a;
+    volatile boolean done = false;
     AtomicInteger realA = new AtomicInteger();
 
     public static void main(String[] args) throws InterruptedException {
-        Runnable r =  new NoVolatile();
+        Runnable r =  new NoVolatile2();
         Thread thread1 = new Thread(r);
         Thread thread2 = new Thread(r);
         thread1.start();
         thread2.start();
         thread1.join();
         thread2.join();
-        System.out.println(((NoVolatile) r).a);
-        System.out.println(((NoVolatile) r).realA.get());
+        System.out.println(((NoVolatile2) r).done);
+        System.out.println(((NoVolatile2) r).realA.get());
     }
     @Override
     public void run() {
         for (int i = 0; i < 10000; i++) {
-            a++;
+            flipDone();
             realA.incrementAndGet();
         }
+    }
+
+    private void flipDone() {
+        //依赖之前的状态，不适用
+        done = !done;
     }
 }
