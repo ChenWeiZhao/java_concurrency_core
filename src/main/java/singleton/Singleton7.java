@@ -1,7 +1,8 @@
 package singleton;
 
 /**
- * 描述：     静态内部类方式，可用
+ * 描述：     静态内部类方式，属于懒汉（可用）
+ * 类的加载JVM保证线程安全
  */
 public class Singleton7 {
 
@@ -9,7 +10,6 @@ public class Singleton7 {
     }
 
     private static class SingletonInstance {
-
         private static final Singleton7 INSTANCE = new Singleton7();
     }
 

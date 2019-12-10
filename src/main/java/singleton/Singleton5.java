@@ -2,6 +2,7 @@ package singleton;
 
 /**
  * 描述：     懒汉式（线程不安全）（不推荐）
+ * 线程不安全，会创建出多个实例
  */
 public class Singleton5 {
 
