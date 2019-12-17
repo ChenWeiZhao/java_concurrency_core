@@ -3,19 +3,21 @@ package deadlock;
 
 /**
  * 描述：     演示哲学家就餐问题导致的死锁
+ * 解决方案：
+ * 1、避免策略（服务员检查、改变一个哲学家拿叉子的顺序，餐票）
+ * 2、检测与恢复策略（领导调节）：
  */
 public class DiningPhilosophers {
 
     public static class Philosopher implements Runnable {
 
         private Object leftChopstick;
+        private Object rightChopstick;
 
         public Philosopher(Object leftChopstick, Object rightChopstick) {
             this.leftChopstick = leftChopstick;
             this.rightChopstick = rightChopstick;
         }
-
-        private Object rightChopstick;
 
         @Override
         public void run() {
@@ -52,6 +54,7 @@ public class DiningPhilosophers {
             Object leftChopstick = chopsticks[i];
             Object rightChopstick = chopsticks[(i + 1) % chopsticks.length];
             if (i == philosophers.length - 1) {
+                //避免策略，先右边在左边
                 philosophers[i] = new Philosopher(rightChopstick, leftChopstick);
             } else {
                 philosophers[i] = new Philosopher(leftChopstick, rightChopstick);

@@ -1,7 +1,7 @@
 package deadlock;
 
 /**
- * 描述：     转账时候遇到死锁，一旦打开注释，便会发生死锁
+ * 描述：    a和b互相转账， 转账时候遇到死锁，一旦打开睡眠注释，便会发生死锁
  */
 public class TransferMoney implements Runnable {
 
@@ -37,17 +37,17 @@ public class TransferMoney implements Runnable {
 
     public static void transferMoney(Account from, Account to, int amount) {
         class Helper {
-
             public void transfer() {
                 if (from.balance - amount < 0) {
                     System.out.println("余额不足，转账失败。");
                     return;
                 }
-                from.balance -= amount;
+                from.balance = from.balance - amount;
                 to.balance = to.balance + amount;
                 System.out.println("成功转账" + amount + "元");
             }
         }
+        //保证获取锁的顺序，利用每个对象都有一个hash值
         int fromHash = System.identityHashCode(from);
         int toHash = System.identityHashCode(to);
         if (fromHash < toHash) {
@@ -56,14 +56,14 @@ public class TransferMoney implements Runnable {
                     new Helper().transfer();
                 }
             }
-        }
-        else if (fromHash > toHash) {
+        } else if (fromHash > toHash) {
             synchronized (to) {
                 synchronized (from) {
                     new Helper().transfer();
                 }
             }
-        }else  {
+        } else {
+            //防止hash值冲突
             synchronized (lock) {
                 synchronized (to) {
                     synchronized (from) {
@@ -75,14 +75,10 @@ public class TransferMoney implements Runnable {
 
     }
 
-
     static class Account {
-
         public Account(int balance) {
             this.balance = balance;
         }
-
         int balance;
-
     }
 }

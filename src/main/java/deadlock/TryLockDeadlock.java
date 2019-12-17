@@ -7,6 +7,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 描述：     用tryLock来避免死锁
+ * 设置超时时间，线程超时的原因有很多
+ * 获取锁失败：打日志，报警。
  */
 public class TryLockDeadlock implements Runnable {
 

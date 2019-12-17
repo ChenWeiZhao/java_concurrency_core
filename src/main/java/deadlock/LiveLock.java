@@ -5,6 +5,8 @@ import jdk.management.resource.internal.inst.RandomAccessFileRMHooks;
 
 /**
  * 描述：     演示活锁问题
+ * 同时拿起左边的餐叉，等待5分钟又同时放下，再等5分钟又同时拿起
+ * 解决办法：等待时间随机
  */
 public class LiveLock {
 

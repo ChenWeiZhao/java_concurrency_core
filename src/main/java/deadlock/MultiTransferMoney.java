@@ -7,10 +7,12 @@ import java.util.Random;
  * 描述：     多人同时转账，依然很危险
  */
 public class MultiTransferMoney {
-
+    //500个账户
     private static final int NUM_ACCOUNTS = 500;
     private static final int NUM_MONEY = 1000;
+    //转账100万次
     private static final int NUM_ITERATIONS = 1000000;
+    //20个线程
     private static final int NUM_THREADS = 20;
 
     public static void main(String[] args) {
@@ -20,8 +22,11 @@ public class MultiTransferMoney {
         for (int i = 0; i < accounts.length; i++) {
             accounts[i] = new Account(NUM_MONEY);
         }
-        class TransferThread extends Thread {
 
+        /**
+         * 转账线程类
+         */
+        class TransferThread extends Thread {
             @Override
             public void run() {
                 for (int i = 0; i < NUM_ITERATIONS; i++) {

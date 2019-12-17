@@ -13,6 +13,7 @@ public class MustDeadLock implements Runnable {
     public static void main(String[] args) {
         MustDeadLock r1 = new MustDeadLock();
         MustDeadLock r2 = new MustDeadLock();
+        //标记位，控制线程去执行不同的逻辑
         r1.flag = 1;
         r2.flag = 0;
         Thread t1 = new Thread(r1);
